@@ -49,7 +49,14 @@ const Drawer = () => {
   const handleClose = useCallback(
     (e: MouseEvent) => {
       toggler(e);
+      // separating id from query params
+      // eslint-disable-next-line
+      const { id, ...routerQuery } = router.query;
+      router.replace({
+        query: { ...routerQuery },
+      });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [toggler]
   );
 
@@ -68,7 +75,11 @@ const Drawer = () => {
         onClose={handleClose}
       >
         {!!drawerData && (
-          <Content drawerData={drawerData} onCopyBillboard={copyBillboard} />
+          <Content
+            drawerData={drawerData}
+            onCopyBillboard={copyBillboard}
+            handleClose={handleClose}
+          />
         )}
       </MuiDrawer>
     </div>

@@ -24,9 +24,14 @@ export interface ContentProps {
   // eslint-disable-next-line no-unused-vars
   onCopyBillboard: (clipped: string) => void;
   drawerData: MarkerData | null;
+  handleClose?: any;
 }
 
-export const Content = ({ drawerData, onCopyBillboard }: ContentProps) => {
+export const Content = ({
+  drawerData,
+  onCopyBillboard,
+  handleClose,
+}: ContentProps) => {
   const { t } = useTranslation("home");
   const {
     data: rawData,
@@ -161,7 +166,10 @@ export const Content = ({ drawerData, onCopyBillboard }: ContentProps) => {
         </div>
       )}
 
-      <CloseIcon onClick={(e) => toggler(e)} className={styles.closeButton} />
+      <CloseIcon
+        onClick={handleClose ? handleClose : (e) => toggler(e)}
+        className={styles.closeButton}
+      />
     </Box>
   );
 };
